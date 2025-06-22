@@ -1,0 +1,283 @@
+/* Modern CSS Architecture */
+:root {
+  /* Colors */
+  --color-primary: #3b82f6;       /* Blue */
+  --color-accent: #10b981;        /* Green */
+  --color-text: #ffffff;           /* White */
+  --color-bg: #1a1a1a;             /* Dark background */
+  --color-bg-hover: #252525;       /* Slightly lighter for hover */
+
+  /* Typography */
+  --font-sans: 'Arial', sans-serif;
+  --font-mono: 'Courier New', monospace;
+  --font-size-base: 1rem;
+  --line-height: 1.6;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Transitions */
+  --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.2s ease;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  line-height: var(--line-height);
+  min-height: 100vh;
+}
+
+/* Fade-in Animation */
+body {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-mono);
+  margin: calc(var(--spacing-lg) * 1.5) 0 var(--spacing-lg);
+  line-height: 1.2;
+  color: var(--color-primary);
+  transition: var(--transition-base);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h1:hover,
+h2:hover,
+h3:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 800px;
+    padding: 0 var(--spacing-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  background: rgba(26, 26, 26, 0.95);
+  box-shadow: 0 0 0.5em rgba(0,0,0,0.25);
+  z-index: 1000;
+  padding: var(--spacing-md) 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo {
+  font-family: var(--font-mono);
+  font-size: 2em;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+.header__logo:hover {
+  color: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+/* Main */
+.main {
+  margin-top: calc(var(--spacing-xl) * 2.5);
+  padding: var(--spacing-lg) 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+/* Sections */
+.section {
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.section__title {
+  margin-bottom: var(--spacing-md);
+  color: var(--color-primary);
+  text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  cursor: default;
+  user-select: none;
+  transition: var(--transition-base);
+}
+
+.section__title:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.7);
+}
+
+/* Projects Grid */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* Project Card */
+.project-card {
+  background: var(--color-bg-hover);
+  padding: var(--spacing-md);
+  border-radius: 8px;
+  transition: var(--transition-base);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 0 transparent;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+.project-card img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-bottom: var(--spacing-md);
+}
+
+.project-card__title {
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 700;
+  transition: var(--transition-fast);
+}
+
+.project-card__title:hover {
+  color: var(--color-accent);
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 0.75em 1.5em;
+  background: var(--color-primary);
+  color: var(--color-bg);
+  text-decoration: none;
+  border-radius: 4px;
+  border: 2px solid var(--color-primary);
+  box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2);
+  transition: var(--transition-base);
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+}
+
+.button:hover,
+.button:focus {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+  outline: none;
+}
+
+/* Contact & Footer */
+.contact-list,
+.footer-contact {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  padding: 0;
+  margin-top: var(--spacing-md);
+}
+
+.contact-list li,
+.footer-contact li {
+  color: var(--color-text);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.contact-list li a,
+.footer-contact li a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-list li a:hover,
+.footer-contact li a:hover {
+  color: var(--color-accent);
+  text-shadow: 0 0 5px rgba(16, 185, 129, 0.7);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    padding: var(--spacing-sm) 0;
+  }
+
+  .main {
+    margin-top: calc(var(--spacing-xl) * 2);
+    padding: var(--spacing-md) 0;
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-list,
+  .footer-contact {
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+}
